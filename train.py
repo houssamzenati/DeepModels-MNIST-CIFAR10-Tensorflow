@@ -12,15 +12,19 @@ img_size = img_height * img_width
 learning_rate = 1E-4
 LOGDIR = '/tmp/mnist-gan2/'
 keep_rate = 0.7
-max_epoch = 20000
+max_epoch = 30000
 
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("MNIST_data", one_hot=True)
 
 def train_model():
 
-    x_data = tf.placeholder(dtype=tf.float32, shape=[batch_size, img_size], name="x_input")
+    tf.reset_default_graph()
+    sess = tf.Session()
+
+    x_data = tf.placeholder(dtype=tf.float32, shape=[batch_size, img_size], name="x_data")
     keep_prob = tf.placeholder(dtype=tf.float32, name="keep_prob")
+    #global_step = tf.get(0, name="global_step", trainable=False)
     with tf.variable_scope('generator_model'):
     	x_generated = model.generator(z_dimension, batch_size)
 
@@ -55,14 +59,14 @@ def train_model():
     tf.summary.scalar('Discriminator_fake_loss', d_loss_fake)
     tf.summary.scalar('Discriminator_total_loss', d_loss)
 
-    tf.summary.image('Generated_images', x_generated, 10)
+    x_generated_reshaped = tf.reshape(x_generated, shape=[-1, 28, 28, 1])
+    tf.summary.image('Generated_images', x_generated_reshaped, 10)
     x_data_reshaped = tf.reshape(x_data, shape=[-1, 28, 28, 1])
     tf.summary.image('data_images', x_data_reshaped, 10)
     merged_summary = tf.summary.merge_all()
 
 
-    tf.reset_default_graph()
-    sess = tf.Session()
+    
     #saver = tf.train.Saver()
 
 
@@ -84,7 +88,7 @@ def train_model():
     	sess.run(g_trainer, feed_dict={x_data: x_batch, keep_prob: keep_rate})
 
     	if i % 20 == 0:
-    		summary = sess.run(merged_summary, feed_dict={x_data: x_batch, z_input: z_sample, keep_prob: keep_rate})
+    		summary = sess.run(merged_summary, feed_dict={x_data: x_batch,  keep_prob: keep_rate})
     		writer.add_summary(summary, i)
     
 
