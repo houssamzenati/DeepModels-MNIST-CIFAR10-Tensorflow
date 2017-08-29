@@ -21,7 +21,6 @@ def train_model():
 
     x_data = tf.placeholder(dtype=tf.float32, shape=[batch_size, img_size], name="x_input")
     keep_prob = tf.placeholder(dtype=tf.float32, name="keep_prob")
-    #global_step = tf.get(0, name="global_step", trainable=False)
     with tf.variable_scope('generator_model'):
     	x_generated = model.generator(z_dimension, batch_size)
 
