@@ -1,6 +1,4 @@
-# Anomaly-Detection
-
-Anomaly Detection materials, by the Deep Learning 2.0 team in I2R, A*STAR, Singapore
+# GANs, VAE, and AE
 
 ## Prerequisites.
 To run the code, follow those steps:
@@ -13,7 +11,7 @@ sudo apt install python3 python3-pip
 Download the project code:
 
 ```
-git clone https://github.com/houssamzenati/Anomaly-Detection.git
+git clone https://github.com/houssamzenati/Generative-Adverserial-Network-MNIST-CIPHAR10-Tensorflow.git
 ```
 Install requirements (in the cloned repository):
 
@@ -30,7 +28,7 @@ python3 main.py --datasets
 
 Source code based on DL2.0 workshop deep learning
 
-## Doing anomaly detection usings GANs, VAE or AE.
+## Train GANs, VAE or AE.
 
 Running the code with different options
 
