@@ -32,3 +32,5 @@ Running the code with different options
 ```
 python3 main.py main.py <gan, ae, vae> <mnist, cifar10> <train, test> <0, 1, 2, 3, 4, 5, 6, 7, 8, 9> <number_epochs>
 ```
+
+(y)
